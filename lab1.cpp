@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "ARXModel.h"
 
 #define DEBUG  // ustaw na MAIN aby skompilować program docelowy / ustaw na DEBUG aby skompilować program testujacy 
@@ -28,7 +29,7 @@ bool porownanieSekwencji(std::vector<double>& spodz, std::vector<double>& fakt)
 	constexpr double TOL = 1e-3;	// tolerancja dla porównań zmiennoprzecinkowych
 	bool result = fakt.size() == spodz.size();
 	for (int i = 0; result && i < fakt.size(); i++)
-		result = fabs(fakt[i] - spodz[i]) < TOL;
+		result = std::abs(fakt[i] - spodz[i]) < TOL;
 	return result;
 }
 
