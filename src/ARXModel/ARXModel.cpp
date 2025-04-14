@@ -20,8 +20,8 @@ double ARXModel::step(double input)
 {
     u.push_front(input);
 
-    double Bu = calculateDiscretePolynomial(B, u.begin() + k);;
-    double Ay = calculateDiscretePolynomial(A, y.begin());
+    double Bu = std::inner_product(B.begin(), B.end(), u.begin() + k, 0.0);
+    double Ay = std::inner_product(A.begin(), A.end(), y.begin(), 0.0);
     double y0 = Bu - Ay + noise();
     
     y.push_front(y0);

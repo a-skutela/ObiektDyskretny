@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <cmath>
 #include "Regulator/PIDRegulator.h"
+#include "Feedback/FeedbackLoop.h"
+#include "ARXModel/ARXModel.h"
 
 #define DEBUG
 
@@ -218,6 +220,21 @@ void test_RegulatorPID_skokJednostkowy()
 	}
 }
 
+void test_FeedbackLoop()
+{
+	std::cerr << "RegPID (k = 0.5, TI = 10.0, TD = 0.2) -> test pętli sprzężenia: " << std::endl;
+	ARXModel object({ -0.4 }, { 0.6 }, 2, 0);
+	PIDRegulator regulator(0.1, 10.0, 0.2);
+	FeedbackLoop feedbackLoop;
+	double y = 0.0;
+	double setpoint = 1.0;
+	for (int i = 0; i < 50; i++)
+	{
+		y = feedbackLoop(setpoint, regulator, object);
+		std::cerr << y << ", ";
+	}
+}
+
 using namespace std;
 
 int main()
@@ -227,7 +244,7 @@ int main()
 	test_RegulatorPI_skokJednostkowy_1();
 	test_RegulatorPI_skokJednostkowy_2();
 	test_RegulatorPID_skokJednostkowy();
-
+	test_FeedbackLoop();
 }
 
 #endif
