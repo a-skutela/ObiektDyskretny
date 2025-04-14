@@ -5,10 +5,10 @@
 #include <numeric>
 #include <random>
 #include <iostream>
-#include "ObjectSISO.h"
-#include "serialization.h"
+#include "../ObjectSISO.h"
+#include "../Serialization/serialization.h"
 
-class ARXModel : ObjectSISO
+class ARXModel : public ObjectSISO
 {
     std::vector<double> A;
     std::vector<double> B;

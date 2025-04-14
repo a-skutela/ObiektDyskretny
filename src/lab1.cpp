@@ -4,7 +4,8 @@
 #include <sstream>
 #include <iomanip>
 #include <cmath>
-#include "ARXModel.h"
+#include <random>
+#include "ARXModel/ARXModel.h"
 
 #define DEBUG  // ustaw na MAIN aby skompilować program docelowy / ustaw na DEBUG aby skompilować program testujacy 
 
@@ -218,6 +219,23 @@ void test_ModelARX_serializationAndDeserialization()
 	}
 }
 
+void test_distribution_serializationAndDeserialization()
+{
+	std::cerr << "distribution-> test serializacji i deserializacji distribution: " << std::endl;
+	std::normal_distribution<double> test = std::normal_distribution<double>(0.0, 0);
+
+	std::stringstream ss2;
+	ss2<<test;
+
+	std::cout << ss2.str() << std::endl;
+
+	std::normal_distribution<double> test2;
+	ss2>>test2;
+	
+	std::cout << test << std::endl;
+	std::cout << test2 << std::endl;
+}
+
 int main()
 {
 	test_ModelARX_brakPobudzenia();
@@ -225,6 +243,7 @@ int main()
 	test_ModelARX_skokJednostkowy_2();
 	test_ModelARX_skokJednostkowy_3();
 	test_ModelARX_serializationAndDeserialization();
+	test_distribution_serializationAndDeserialization();
 }
 
 #endif
