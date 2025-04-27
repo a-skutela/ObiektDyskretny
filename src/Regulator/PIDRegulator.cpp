@@ -1,8 +1,13 @@
 #include "PIDRegulator.h"
+#include <stdexcept>
 
 PIDRegulator::PIDRegulator(double k, double Ti, double Td)
 : k(k), Ti(Ti), Td(Td)
 {
+    validateNonNegative(k, "k");
+    validateNonNegative(Ti, "Ti");
+    validateNonNegative(Td, "Td");
+
     integral = 0.0;
     e_prev = 0.0;
 }
@@ -35,4 +40,30 @@ double PIDRegulator::differentialResponse(double e)
     double response = Td * (e - e_prev);
     e_prev = e;
     return response;
+}
+
+void PIDRegulator::setK(double k)
+{
+    validateNonNegative(k, "k");
+    this->k = k;
+}
+
+void PIDRegulator::setTi(double Ti)
+{
+    validateNonNegative(Ti, "Ti");
+    this->Ti = Ti;
+}
+
+void PIDRegulator::setTd(double Td)
+{
+    validateNonNegative(Td, "Td");
+    this->Td = Td;
+}
+
+void PIDRegulator::validateNonNegative(double value, const std::string& name)
+{
+    if (value < 0)
+    {
+        throw std::invalid_argument(name + " must be non-negative.");
+    }
 }

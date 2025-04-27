@@ -1,5 +1,6 @@
 #include "ARXModel.h"
-#include <iostream>
+#include <stdexcept>
+#include <numeric>
 
 ARXModel::ARXModel(std::vector<double> A, std::vector<double> B, unsigned int k, double stdDev, uint_fast32_t seed) 
 : A(A), B(B), k(k) 
@@ -14,6 +15,12 @@ ARXModel::ARXModel(std::vector<double> A, std::vector<double> B, unsigned int k,
 ARXModel::ARXModel(std::istream& input)
 {
     input >> *this;
+    if (input.eof()) {
+        throw std::runtime_error("End of file reached while reading ARXModel from input stream.");
+    }
+    if (!input) {
+        throw std::runtime_error("Error while reading ARXModel from input stream.");
+    }
 }
 
 double ARXModel::step(double input) 

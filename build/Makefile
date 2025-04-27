@@ -16,3 +16,9 @@ lab2_build:
 
 lab2_run:
 	./lab2
+
+lab2_build_win:
+	g++ -std=c++11 ../src/lab2.cpp ../src/ARXModel/ARXModel.cpp ../src/Serialization/serialization.cpp ../src/Regulator/PIDRegulator.cpp ../src/Feedback/FeedbackLoop.cpp -o lab2.exe
+
+lab2_run_win:
+	./lab2.exe

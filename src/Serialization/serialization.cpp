@@ -1,7 +1,5 @@
 #include "serialization.h"
 #include "../ARXModel/ARXModel.h"
-#include <iostream>
-#include <random>
 
 std::ostream& operator<<(std::ostream& output, const ARXModel& arxModel)
 {
