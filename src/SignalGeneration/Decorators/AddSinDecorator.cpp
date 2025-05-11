@@ -5,7 +5,7 @@ AddSinDecorator::AddSinDecorator(std::shared_ptr<Signal> decoratedObject, double
 : SignalDecorator(decoratedObject), sinSignal(omega, amplitude)
 {}
 
-double AddSinDecorator::generate(int n)
+double AddSinDecorator::generate()
 {
-    return decoratedObject->generate(n) + sinSignal.generate(n);
+    return decoratedObject->generate() + sinSignal.generate();
 }

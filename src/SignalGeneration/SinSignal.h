@@ -2,6 +2,11 @@
 
 #include "Signal.h"
 
+/**
+ * \author Adrian Skutela
+ * \class SinSignal
+ * \brief Generates a sine wave signal.
+ */
 class SinSignal : public Signal
 {
     int period;
@@ -13,5 +18,5 @@ class SinSignal : public Signal
 public:
     SinSignal(double omega, double amplitude);
     
-    double generate(int n) override;
+    double generate() override;
 };

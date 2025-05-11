@@ -1,12 +1,28 @@
+#pragma once
 
 #include "SignalDecorator.h"
 #include "../SinSignal.h"
 
+/**
+ * \author Adrian Skutela
+ * \class AddSinDecorator
+ * \brief Decorator that adds a sine wave to an existing signal.
+ */
 class AddSinDecorator : public SignalDecorator
 {
     SinSignal sinSignal;
 public:
+    /**
+     * \brief Constructs an AddSinDecorator instance.
+     * \param decoratedObject The signal to be decorated.
+     * \param omega The angular frequency of the sine wave.
+     * \param amplitude The amplitude of the sine wave.
+     */
     AddSinDecorator(std::shared_ptr<Signal> decoratedObject, double omega, double amplitude);
 
-    double generate(int n) override;
+    /**
+     * \brief Generates a single sample of the decorated signal.
+     * \return A sample value of the decorated signal.
+     */
+    double generate() override;
 };

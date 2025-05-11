@@ -10,10 +10,11 @@ SinSignal::SinSignal(double omega, double amplitude)
     x1Factor = 2 * std::cos(omega);
 }
 
-double SinSignal::generate(int n)
+double SinSignal::generate()
 {
     double x = x1 * x1Factor - x2;
+    double result = x2;
     x2 = x1;
     x1 = x;
-    return x;
+    return result;
 }
