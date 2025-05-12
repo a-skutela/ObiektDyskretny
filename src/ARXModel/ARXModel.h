@@ -3,6 +3,7 @@
 #include <vector>
 #include <deque>
 #include <random>
+#include "../Composition/ConcreteComponent.h"
 #include "../ObjectSISO.h"
 #include "../Serialization/serialization.h"
 
@@ -11,7 +12,7 @@
  * \class ARXModel
  * \brief Implements an Auto-Regressive with eXogenous input (ARX) model.
  */
-class ARXModel : public ObjectSISO
+class ARXModel : public ConcreteComponent
 {
     std::vector<double> A;
     std::vector<double> B;
