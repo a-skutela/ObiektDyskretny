@@ -147,6 +147,7 @@ lab5_build_win:
 	 ../src/Composition/ParallelComposite.cpp \
 	 ../src/Composition/SerialComposite.cpp \
 	 ../src/Composition/ComponentFactory.cpp \
+	 ../src/Simulation/Simulator.cpp \
 	 -o lab5.exe
 
 lab5_run_win:

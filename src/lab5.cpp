@@ -12,6 +12,7 @@
 #include "Composition/SerialComposite.h"
 #include "Composition/ParallelComposite.h"
 #include "Composition/FeedbackComposite.h"
+#include "Simulation/Simulator.h"
 
 #include "SignalGeneration/SinSignal.h"
 #include "SignalGeneration/RectSignal.h"
@@ -26,6 +27,10 @@
 #include "SignalGeneration/Decorators/ClampDecorator.h"
 
 using namespace std;
+
+#define MAIN
+
+#ifdef DEBUG
 
 constexpr auto pi = 3.14159265358979323846;
 
@@ -200,3 +205,16 @@ int main()
     test_signal_serdes();
     test_full();
 }
+
+#endif
+
+#ifdef MAIN
+
+int main()
+{
+	Simulator simulator;
+
+    simulator.run();
+}
+
+#endif
