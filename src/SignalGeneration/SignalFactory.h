@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "signal.h"
+#include "Signal.h"
 
 class SignalFactory
 {

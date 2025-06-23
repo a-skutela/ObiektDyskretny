@@ -22,50 +22,13 @@ protected:
      * \brief Serializes the component to an output stream.
      * \param output The output stream to serialize to.
      */
-    virtual void serializeImpl(std::ostream& output) const
-    {
-        output << components.size() << " ";
-        for (const auto& component : components)
-        {
-            output << component->getType() << " ";
-            component->serialize(output);
-        }
-    }
+    virtual void serializeImpl(std::ostream& output) const;
 
     /**
      * \brief Deserializes the component from an input stream.
      * \param input The input stream to deserialize from.
      */
-    virtual void deserializeImpl(std::istream& input)
-    {
-        size_t size;
-        input >> size;
-
-        components.clear();
-        
-        for (size_t i = 0; i < size; ++i)
-        {
-            std::string type;
-            input >> type;
-
-            if (input.fail())
-            {
-                throw std::runtime_error("Error reading component type from input stream.");
-            }
-
-            std::shared_ptr<Component> component = ComponentFactory::createComponent(type);
-
-            if (component)
-            {
-                component->deserialize(input);
-                components.push_back(component);
-            }
-            else
-            {
-                throw std::runtime_error("Unknown component type: " + type);
-            }
-        }
-    }
+    virtual void deserializeImpl(std::istream& input);
 
 public:
     /**

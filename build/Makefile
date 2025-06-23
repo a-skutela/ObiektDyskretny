@@ -112,11 +112,14 @@ lab5_build:
 	 ../src/SignalGeneration/Decorators/AddWhiteNoiseDecorator.cpp \
 	 ../src/SignalGeneration/Decorators/AddConstantDecorator.cpp \
 	 ../src/SignalGeneration/Decorators/ClampDecorator.cpp \
+	 ../src/SignalGeneration/SignalFactory.cpp \
 	 ../src/Composition/Composite.cpp \
 	 ../src/Composition/ConcreteComponent.cpp \
 	 ../src/Composition/FeedbackComposite.cpp \
 	 ../src/Composition/ParallelComposite.cpp \
 	 ../src/Composition/SerialComposite.cpp \
+	 ../src/Composition/ComponentFactory.cpp \
+	 ../src/Simulation/Simulator.cpp \
 	 -o lab5
 
 lab5_run:
