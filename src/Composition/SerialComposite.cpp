@@ -16,3 +16,13 @@ std::string SerialComposite::getType() const
 {
     return SerialComposite::type;
 }
+
+void SerialComposite::serialize(std::ostream& output) const
+{
+    serializeImpl(output);
+}
+
+void SerialComposite::deserialize(std::istream& input)
+{
+    deserializeImpl(input);
+}

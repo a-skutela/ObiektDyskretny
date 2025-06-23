@@ -21,3 +21,13 @@ std::string ParallelComposite::getType() const
 {
     return ParallelComposite::type;
 }
+
+void ParallelComposite::serialize(std::ostream& output) const
+{
+    serializeImpl(output);
+}
+
+void ParallelComposite::deserialize(std::istream& input)
+{
+    deserializeImpl(input);
+}

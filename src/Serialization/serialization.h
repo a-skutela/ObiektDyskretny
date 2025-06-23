@@ -2,6 +2,7 @@
 
 #include <istream>
 #include <ostream>
+#include <deque>
 #include <vector>
 
 class ARXModel;
@@ -58,6 +59,45 @@ std::istream& operator>>(std::istream& input, std::vector<T>& vector)
         double el;
         input >> el;
         vector.push_back(el);
+    }
+    return input;
+}
+
+/**
+ * \brief Serializes a deque to an output stream.
+ * \tparam T The type of elements in the deque.
+ * \param output The output stream.
+ * \param deque The deque to serialize.
+ * \return The output stream.
+ */
+template<typename T>
+std::ostream& operator<<(std::ostream& output, const std::deque<T>& deque)
+{
+    output << deque.size() << " ";
+    for (auto& el : deque)
+        output << el << " ";
+    return output;
+}
+
+/**
+ * \brief Deserializes a deque from an input stream.
+ * \tparam T The type of elements in the deque.
+ * \param input The input stream.
+ * \param deque The deque to deserialize into.
+ * \return The input stream.
+ */
+template<typename T>
+std::istream& operator>>(std::istream& input, std::deque<T>& deque)
+{
+    size_t size;
+    input >> size;
+
+    deque.clear();
+    for (size_t i = 0; i < size; i++)
+    {
+        double el;
+        input >> el;
+        deque.push_back(el);
     }
     return input;
 }

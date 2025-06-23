@@ -40,7 +40,8 @@ double ARXModel::step(double input)
 
 double ARXModel::noise()
 {
-    return distribution(generator);
+    return 0.0;
+    //return distribution(generator);
 }
 
 bool ARXModel::operator==(const ARXModel& other) const

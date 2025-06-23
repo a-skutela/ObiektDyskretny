@@ -93,3 +93,61 @@ lab4_build_win:
 
 lab4_run_win:
 	./lab4.exe
+
+lab5_build:
+	g++ -std=c++11 ../src/lab5.cpp \
+	 ../src/ARXModel/ARXModel.cpp \
+	 ../src/Serialization/serialization.cpp \
+	 ../src/Regulator/PIDRegulator.cpp \
+	 ../src/Feedback/FeedbackLoop.cpp \
+	 ../src/SignalGeneration/ConstantSignal.cpp \
+	 ../src/SignalGeneration/RectSignal.cpp \
+	 ../src/SignalGeneration/SinSignal.cpp \
+	 ../src/SignalGeneration/TriangleSignal.cpp \
+	 ../src/SignalGeneration/WhiteNoiseSignal.cpp \
+	 ../src/SignalGeneration/Decorators/SignalDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddSinDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddRectDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddTriangleDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddWhiteNoiseDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddConstantDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/ClampDecorator.cpp \
+	 ../src/Composition/Composite.cpp \
+	 ../src/Composition/ConcreteComponent.cpp \
+	 ../src/Composition/FeedbackComposite.cpp \
+	 ../src/Composition/ParallelComposite.cpp \
+	 ../src/Composition/SerialComposite.cpp \
+	 -o lab5
+
+lab5_run:
+	./lab5
+	
+lab5_build_win:
+	g++ -std=c++11 ../src/lab5.cpp \
+	 ../src/ARXModel/ARXModel.cpp \
+	 ../src/Serialization/serialization.cpp \
+	 ../src/Regulator/PIDRegulator.cpp \
+	 ../src/Feedback/FeedbackLoop.cpp \
+	 ../src/SignalGeneration/ConstantSignal.cpp \
+	 ../src/SignalGeneration/RectSignal.cpp \
+	 ../src/SignalGeneration/SinSignal.cpp \
+	 ../src/SignalGeneration/TriangleSignal.cpp \
+	 ../src/SignalGeneration/WhiteNoiseSignal.cpp \
+	 ../src/SignalGeneration/Decorators/SignalDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddSinDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddRectDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddTriangleDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddWhiteNoiseDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddConstantDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/ClampDecorator.cpp \
+	 ../src/SignalGeneration/SignalFactory.cpp \
+	 ../src/Composition/Composite.cpp \
+	 ../src/Composition/ConcreteComponent.cpp \
+	 ../src/Composition/FeedbackComposite.cpp \
+	 ../src/Composition/ParallelComposite.cpp \
+	 ../src/Composition/SerialComposite.cpp \
+	 ../src/Composition/ComponentFactory.cpp \
+	 -o lab5.exe
+
+lab5_run_win:
+	./lab5.exe

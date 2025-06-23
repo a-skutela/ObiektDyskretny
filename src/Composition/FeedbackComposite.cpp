@@ -17,3 +17,18 @@ std::string FeedbackComposite::getType() const
 {
     return FeedbackComposite::type;
 }
+
+void FeedbackComposite::serialize(std::ostream& output) const
+{
+    output << y_prev << " ";
+    serializeImpl(output);
+}
+
+void FeedbackComposite::deserialize(std::istream& input)
+{
+    input >> y_prev;
+    if (input.fail()) {
+        throw std::runtime_error("Error while reading FeedbackComposite from input stream.");
+    }
+    deserializeImpl(input);
+}
