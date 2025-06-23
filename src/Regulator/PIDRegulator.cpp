@@ -72,14 +72,13 @@ const std::string PIDRegulator::type = "PIDRegulator";
 
 void PIDRegulator::serialize(std::ostream& output) const
 {
-    output << PIDRegulator::type << " ";
     output << k << " " << Ti << " " << Td << " " << integral << " " << e_prev << std::endl;
 }
 
 void PIDRegulator::deserialize(std::istream& input)
 {
     input >> k >> Ti >> Td >> integral >> e_prev;
-    if (!input)
+    if (input.fail())
     {
         throw std::runtime_error("Error while deserializing PIDRegulator from input stream.");
     }

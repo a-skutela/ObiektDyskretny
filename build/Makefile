@@ -82,6 +82,7 @@ lab4_build_win:
 	 ../src/SignalGeneration/Decorators/AddWhiteNoiseDecorator.cpp \
 	 ../src/SignalGeneration/Decorators/AddConstantDecorator.cpp \
 	 ../src/SignalGeneration/Decorators/ClampDecorator.cpp \
+	 ../src/SignalGeneration/SignalFactory.cpp \
 	 ../src/Composition/Composite.cpp \
 	 ../src/Composition/ConcreteComponent.cpp \
 	 ../src/Composition/FeedbackComposite.cpp \

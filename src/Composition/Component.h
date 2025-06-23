@@ -5,7 +5,6 @@
 #include <ostream>
 #include <string>
 #include "../ObjectSISO.h"
-#include "../../ext_lib/json.hpp"
 
 /**
  * \class Component

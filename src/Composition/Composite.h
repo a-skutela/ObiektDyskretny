@@ -40,6 +40,7 @@ public:
         output << components.size() << " ";
         for (const auto& component : components)
         {
+            output << component->getType() << " ";
             component->serialize(output);
         }
     }
@@ -59,10 +60,17 @@ public:
         {
             std::string type;
             input >> type;
+
+            if (input.fail())
+            {
+                throw std::runtime_error("Error reading component type from input stream.");
+            }
+
             std::shared_ptr<Component> component = ComponentFactory::createComponent(type);
 
             if (component)
             {
+                component->deserialize(input);
                 components.push_back(component);
             }
             else

@@ -20,3 +20,20 @@ double ClampDecorator::generate()
         return value;
     }
 }
+
+const std::string ClampDecorator::type = "ClampDecorator";
+
+std::string ClampDecorator::getType() const
+{
+    return ClampDecorator::type;
+}
+
+void ClampDecorator::serializeImpl(std::ostream& output) const
+{
+    output << minValue << " " << maxValue << " ";
+}
+
+void ClampDecorator::deserializeImpl(std::istream& input)
+{
+    input >> minValue >> maxValue;
+}

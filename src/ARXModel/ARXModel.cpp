@@ -18,7 +18,7 @@ ARXModel::ARXModel(std::istream& input)
     if (input.eof()) {
         throw std::runtime_error("End of file reached while reading ARXModel from input stream.");
     }
-    if (!input) {
+    if (input.fail()) {
         throw std::runtime_error("Error while reading ARXModel from input stream.");
     }
 }

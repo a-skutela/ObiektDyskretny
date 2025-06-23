@@ -9,3 +9,20 @@ double AddRectDecorator::generate()
 {
     return decoratedObject->generate() + rectSignal.generate();
 }
+
+std::string AddRectDecorator::getType() const
+{
+    return AddRectDecorator::type;
+}
+
+const std::string AddRectDecorator::type = "AddRectDecorator";
+
+void AddRectDecorator::serializeImpl(std::ostream& output) const
+{
+    rectSignal.serialize(output);
+}
+
+void AddRectDecorator::deserializeImpl(std::istream& input)
+{
+    rectSignal.deserialize(input);
+}

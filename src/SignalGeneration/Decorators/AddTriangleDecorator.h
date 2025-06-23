@@ -26,4 +26,16 @@ public:
      * \return A sample value of the decorated signal.
      */
     double generate() override;
+
+    /**
+     * \brief Retrieves the type of the decorator.
+     * \return A string representing the type of the decorator.
+     */
+    std::string getType() const override;
+
+    static const std::string type;
+
+protected:
+    void serializeImpl(std::ostream& output) const override;
+    void deserializeImpl(std::istream& input) override;
 };

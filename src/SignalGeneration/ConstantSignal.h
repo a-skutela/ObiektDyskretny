@@ -25,7 +25,27 @@ public:
     double generate() override;
 
     /**
+     * \brief Returns the type of the signal.
+     * \return The type of the signal as a string.
+     */
+    std::string getType() const override;
+
+    /**
+     * \brief Serializes the constant signal to an output stream.
+     * \param output The output stream to serialize to.
+     */
+    void serialize(std::ostream& output) const override;
+
+    /**
+     * \brief Deserializes the constant signal from an input stream.
+     * \param input The input stream to deserialize from.
+     */
+    void deserialize(std::istream& input) override;
+
+    /**
      * \brief A constant signal with a value of 0.0.
      */
     static const ConstantSignal zero;
+
+    static const std::string type;
 };
