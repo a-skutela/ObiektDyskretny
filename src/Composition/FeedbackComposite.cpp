@@ -24,11 +24,11 @@ void FeedbackComposite::serialize(std::ostream& output) const
     serializeImpl(output);
 }
 
-void FeedbackComposite::deserialize(std::istream& input)
+void FeedbackComposite::deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& components)
 {
     input >> y_prev;
     if (input.fail()) {
         throw std::runtime_error("Error while reading FeedbackComposite from input stream.");
     }
-    deserializeImpl(input);
+    deserializeImpl(input, components);
 }

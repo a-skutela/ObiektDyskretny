@@ -60,6 +60,11 @@ void PIDRegulator::setTd(double Td)
     this->Td = Td;
 }
 
+void PIDRegulator::print(std::ostream& output) const
+{
+    output << "K: " << k << "   Ti: " << Ti << "   Td: " << Td << std::endl;
+}
+
 void PIDRegulator::validateNonNegative(double value, const std::string& name)
 {
     if (value < 0)
@@ -75,7 +80,7 @@ void PIDRegulator::serialize(std::ostream& output) const
     output << k << " " << Ti << " " << Td << " " << integral << " " << e_prev << std::endl;
 }
 
-void PIDRegulator::deserialize(std::istream& input)
+void PIDRegulator::deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents)
 {
     input >> k >> Ti >> Td >> integral >> e_prev;
     if (input.fail())

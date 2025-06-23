@@ -6,6 +6,7 @@
 #include "../SignalGeneration/Decorators/AddSinDecorator.h"
 #include "../SignalGeneration/Decorators/ClampDecorator.h"
 #include "../SignalGeneration/Decorators/AddRectDecorator.h"
+#include "../Regulator/PIDRegulator.h"
 
 Simulator::Simulator()
 {
@@ -18,7 +19,7 @@ void Simulator::run()
     while(!shouldExit)
     {
         std::string command;
-        std::cout << "Enter command (import, export, simulate, exit, example): ";
+        std::cout << "Enter command (import, export, simulate, list, edit, details, exit): ";
         std::cin >> command;
 
         if (command == "import")
@@ -41,6 +42,22 @@ void Simulator::run()
         {
             example();
         }
+        else if (command == "example2")
+        {
+            example2();
+        }
+        else if (command == "list")
+        {
+            list();
+        }
+        else if (command == "details")
+        {
+            details();
+        }
+        else if (command == "edit")
+        {
+            edit();
+        }
         else
         {
             std::cout << "Unknown command: " << command << std::endl;
@@ -59,7 +76,7 @@ void Simulator::simulate()
     std::cin >> steps;
     if (!std::cin.good())
     {
-        std::cout << "Number of steps must be an intiger!" << std::endl;
+        std::cout << "Number of steps must be an integer!" << std::endl;
         return;
     }
 
@@ -74,12 +91,13 @@ void Simulator::simulate()
         auto signalValue = signal->generate();
         auto output = topComponent->step(signalValue);
 
-        std::cout << output << std::endl;
+        std::cout << "setpoint: " << signalValue << "   output: " << output << std::endl;
     }
 }
 
 void Simulator::importModel()
 {
+    components = std::vector<std::shared_ptr<Component>>();
     std::string filename = "";
 
     if (std::cin.eof())
@@ -99,7 +117,7 @@ void Simulator::importModel()
 
     try 
     {
-        topComponent->deserialize(file);
+        topComponent->deserialize(file, components);
         signal->deserialize(file);
     } 
     catch (const std::exception& e) 
@@ -125,6 +143,7 @@ void Simulator::example()
     feedbackLoop->dodaj(arx);
     feedbackLoop->dodaj(parallelComp);
     originalModel->dodaj(feedbackLoop);
+    components = std::vector<std::shared_ptr<Component>>{pid, multBy0p2, arx, parallelComp, multBy0p2, feedbackLoop};
 
     std::shared_ptr<ConstantSignal> signal = std::make_shared<ConstantSignal>(0.0);
     std::shared_ptr<AddRectDecorator> rectDecorator = std::make_shared<AddRectDecorator>(signal, 10.0, 100, 0.5);
@@ -134,6 +153,26 @@ void Simulator::example()
     this->topComponent = originalModel;
     this->signal = originalSignal;
 }
+
+void Simulator::example2()
+{
+    std::shared_ptr<Component> pid = std::make_shared<PIDRegulator>(0.5, 10.0, 0.2);
+    std::shared_ptr<Component> arx = std::make_shared<ARXModel>(std::vector<double>{ -0.4,0.2 }, std::vector<double>{ 0.6, 0.3 }, 2, 0);
+    std::shared_ptr<Composite> feedbackLoop = std::make_shared<FeedbackComposite>();
+    std::shared_ptr<SerialComposite> originalModel = std::make_shared<SerialComposite>();
+    feedbackLoop->dodaj(pid);
+    feedbackLoop->dodaj(arx);
+    originalModel->dodaj(feedbackLoop);
+    components = std::vector<std::shared_ptr<Component>>{pid, arx, feedbackLoop};
+
+    std::shared_ptr<ConstantSignal> signal = std::make_shared<ConstantSignal>(0.0);
+    std::shared_ptr<AddRectDecorator> rectDecorator = std::make_shared<AddRectDecorator>(signal, 2.0, 100, 0.5);
+    std::shared_ptr<AddConstantDecorator> originalSignal = std::make_shared<AddConstantDecorator>(rectDecorator, 0.0);
+
+    this->topComponent = originalModel;
+    this->signal = originalSignal;
+}
+
 
 void Simulator::exportModel()
 {
@@ -164,4 +203,76 @@ void Simulator::exportModel()
         std::cout << "Error during export: " << e.what() << std::endl;
         std::cout << "File might not contain valid data" << e.what() << std::endl;
     }
+}
+
+void Simulator::list()
+{
+    for (size_t i = 0; i < components.size(); i++)
+    {
+        std::cout << i << ") " << components[i]->getType() << std::endl;
+    }
+}
+
+void Simulator::edit()
+{
+    int index = 0;
+    std::cin >> index;
+
+    if (!std::cin.good())
+    {
+        std::cout << "Index must be an integer!" << std::endl;
+        return;
+    }
+
+    if (index >= components.size())
+    {
+        std::cout << "Index out of range" << std::endl;
+        return;
+    }
+
+    auto component = components[index];
+
+    if (component->getType() == PIDRegulator::type)
+    {
+        auto pid = std::dynamic_pointer_cast<PIDRegulator>(component);
+        double k;
+        double Ti;
+        double Td;
+
+        std::cin >> k >> Ti >> Td;
+
+        if (!std::cin.good())
+        {
+            std::cout << "IUnknown Error!" << std::endl;
+            return;
+        }
+
+        pid->setK(k);
+        pid->setTi(Ti);
+        pid->setTd(Td);
+    }
+    else
+    {
+        std::cout << "Component " << component->getType() << " is not editable" << std::endl;
+    }
+}
+
+void Simulator::details()
+{
+    int index = 0;
+    std::cin >> index;
+
+    if (!std::cin.good())
+    {
+        std::cout << "Index must be an integer!" << std::endl;
+        return;
+    }
+
+    if (index >= components.size())
+    {
+        std::cout << "Index out of range" << std::endl;
+        return;
+    }
+
+    components[index]->print(std::cout);
 }

@@ -21,7 +21,7 @@
  */
 class Simulator 
 {
-    std::map<int, std::shared_ptr<Component>> components;
+    std::vector<std::shared_ptr<Component>> components;
     std::shared_ptr<SerialComposite> topComponent;
 
     std::shared_ptr<AddConstantDecorator> signal;
@@ -34,7 +34,15 @@ class Simulator
 
     void simulate();
 
+    void list();
+
+    void edit();
+
+    void details();
+
     void example();
+
+    void example2();
 
 public:
     /**

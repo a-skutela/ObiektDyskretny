@@ -27,7 +27,7 @@ void ParallelComposite::serialize(std::ostream& output) const
     serializeImpl(output);
 }
 
-void ParallelComposite::deserialize(std::istream& input)
+void ParallelComposite::deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents)
 {
-    deserializeImpl(input);
+    deserializeImpl(input, components);
 }

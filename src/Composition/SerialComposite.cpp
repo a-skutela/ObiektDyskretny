@@ -22,7 +22,7 @@ void SerialComposite::serialize(std::ostream& output) const
     serializeImpl(output);
 }
 
-void SerialComposite::deserialize(std::istream& input)
+void SerialComposite::deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents)
 {
-    deserializeImpl(input);
+    deserializeImpl(input, gComponents);
 }

@@ -30,5 +30,5 @@ public:
      * \brief Deserializes the composite from an input stream.
      * \param input The input stream to deserialize from.
      */
-    void deserialize(std::istream& input) override;
+    void deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents) override;
 };

@@ -4,6 +4,7 @@
 #include <istream>
 #include <ostream>
 #include <string>
+#include <vector>
 #include "../ObjectSISO.h"
 
 /**
@@ -38,7 +39,9 @@ public:
      * \brief Deserializes the component from an input stream.
      * \param input The input stream to deserialize from.
      */
-    virtual void deserialize(std::istream& input) = 0;
+    virtual void deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& components) = 0;
+
+    virtual void print(std::ostream& output) const = 0;
 
     /**
      * \brief Retrieves the type of the component as a string.

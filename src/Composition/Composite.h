@@ -28,7 +28,7 @@ protected:
      * \brief Deserializes the component from an input stream.
      * \param input The input stream to deserialize from.
      */
-    virtual void deserializeImpl(std::istream& input);
+    virtual void deserializeImpl(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents);
 
 public:
     /**
@@ -44,4 +44,6 @@ public:
      * \return True if the component was removed successfully, false otherwise.
      */
     bool usun(std::shared_ptr<Component> component);
+
+    void print(std::ostream& output) const override;
 };

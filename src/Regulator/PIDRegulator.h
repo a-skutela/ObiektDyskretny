@@ -53,6 +53,8 @@ public:
      */
     void setTd(double Td);
 
+    void print(std::ostream& output) const override;
+
     /**
      * \brief Serializes the PIDRegulator instance to an output stream.
      * \param output The output stream to serialize to.
@@ -63,7 +65,7 @@ public:
      * \brief Deserializes the PIDRegulator instance from an input stream.
      * \param input The input stream to deserialize from.
      */
-    void deserialize(std::istream& input) override;
+    void deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents) override;
 
     /**
      * \brief Retrieves the type of the regulator as a string.

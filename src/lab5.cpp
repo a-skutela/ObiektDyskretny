@@ -79,6 +79,7 @@ void test_SISO(std::shared_ptr<ObjectSISO> sut, std::shared_ptr<ObjectSISO> gold
 
 void test_model_serdes()
 {   
+    std::vector<std::shared_ptr<Component>> gComponents;
     std::cout << "Porownanie wynikow oryginalnego i zdeserializowanego modelu:\n";
 
     std::shared_ptr<Component> pid = std::make_shared<PIDRegulator>(0.5, 10.0, 0.2);
@@ -99,7 +100,7 @@ void test_model_serdes()
     originalModel->serialize(ss);
 
     std::shared_ptr<SerialComposite> deserializedModel = std::make_shared<SerialComposite>();
-    deserializedModel->deserialize(ss);
+    deserializedModel->deserialize(ss, gComponents);
 
     test_SISO(originalModel, deserializedModel, std::vector<double>{0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 2.0, 3.0, 4.0, 5.0});
 }
@@ -140,6 +141,7 @@ void test_signal_serdes()
 
 void test_full()
 {   
+    std::vector<std::shared_ptr<Component>> gComponents;
     std::cout << "Porownanie wynikow oryginalnej i zdeserializowanej symulacji:\n";
 
     std::shared_ptr<Component> pid = std::make_shared<PIDRegulator>(0.5, 10.0, 0.2);
@@ -171,7 +173,7 @@ void test_full()
     originalSignal->serialize(ss);
 
     std::shared_ptr<SerialComposite> deserializedModel = std::make_shared<SerialComposite>();
-    deserializedModel->deserialize(ss);
+    deserializedModel->deserialize(ss, gComponents);
 
     std::shared_ptr<AddConstantDecorator> deserializedSignal = std::make_shared<AddConstantDecorator>(nullptr, 0.0);
     deserializedSignal->deserialize(ss);

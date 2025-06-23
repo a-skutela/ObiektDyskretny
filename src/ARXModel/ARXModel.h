@@ -57,7 +57,7 @@ public:
      * \brief Deserializes the ARXModel instance from an input stream.
      * \param input The input stream to deserialize from.
      */
-    void deserialize(std::istream& input) override;
+    void deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents) override;
 
     /**
      * \brief Compares two ARXModel instances for equality.
@@ -71,6 +71,8 @@ public:
      * \return A string representing the type of the model.
      */
     std::string getType() const override;
+
+    void print(std::ostream& output) const override;
 
     static const std::string type;
 

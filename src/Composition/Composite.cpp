@@ -25,7 +25,7 @@ bool Composite::usun(std::shared_ptr<Component> component)
     }
 }
 
-void Composite::deserializeImpl(std::istream& input)
+void Composite::deserializeImpl(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents)
 {
     size_t size;
     input >> size;
@@ -46,8 +46,9 @@ void Composite::deserializeImpl(std::istream& input)
 
         if (component)
         {
-            component->deserialize(input);
+            component->deserialize(input, gComponents);
             components.push_back(component);
+            gComponents.push_back(component);
         }
         else
         {
@@ -65,3 +66,13 @@ void Composite::serializeImpl(std::ostream& output) const
         component->serialize(output);
     }
 }
+
+void Composite::print(std::ostream& output) const
+{
+    for(auto c : components)
+    {
+        output << "[" << c->getType() << "] ";
+        c->print(output);
+    }
+}
+

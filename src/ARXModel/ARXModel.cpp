@@ -40,8 +40,7 @@ double ARXModel::step(double input)
 
 double ARXModel::noise()
 {
-    return 0.0;
-    //return distribution(generator);
+    return distribution(generator);
 }
 
 bool ARXModel::operator==(const ARXModel& other) const
@@ -58,7 +57,7 @@ void ARXModel::serialize(std::ostream& output) const
     output << *this;
 }
 
-void ARXModel::deserialize(std::istream& input)
+void ARXModel::deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& gComponents)
 {
     input >> *this;
 }
@@ -68,4 +67,9 @@ std::string const ARXModel::type = "ARXModel";
 std::string ARXModel::getType() const
 {
      return ARXModel::type;
+}
+
+void ARXModel::print(std::ostream& output) const
+{
+    output << "A: " << A << "   B: " << B << std::endl;
 }
