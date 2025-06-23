@@ -71,5 +71,21 @@ std::string ARXModel::getType() const
 
 void ARXModel::print(std::ostream& output) const
 {
-    output << "A: " << A << "   B: " << B << std::endl;
+    output << "A: " << A << "   B: " << B << "   k: " << k << std::endl;
+}
+
+
+void ARXModel::setA(std::vector<double> newA)
+{
+    A = newA;
+}
+
+void ARXModel::setB(std::vector<double> newB)
+{
+    B = newB;
+}
+
+void ARXModel::setK(int newK)
+{
+    k = newK;
 }

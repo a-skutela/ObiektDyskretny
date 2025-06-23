@@ -66,6 +66,12 @@ public:
      */
     bool operator==(const ARXModel& other) const;
 
+    void setA(std::vector<double> newA);
+
+    void setB(std::vector<double> newB);
+
+    void setK(int newK);
+
     /**
      * \brief Retrieves the type of the model as a string.
      * \return A string representing the type of the model.

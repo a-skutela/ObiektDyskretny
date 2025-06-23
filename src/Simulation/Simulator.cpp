@@ -61,6 +61,8 @@ void Simulator::run()
         else
         {
             std::cout << "Unknown command: " << command << std::endl;
+            std::cin.clear();
+            std::cin.ignore();
         }
     }
 }
@@ -157,7 +159,7 @@ void Simulator::example()
 void Simulator::example2()
 {
     std::shared_ptr<Component> pid = std::make_shared<PIDRegulator>(0.5, 10.0, 0.2);
-    std::shared_ptr<Component> arx = std::make_shared<ARXModel>(std::vector<double>{ -0.4,0.2 }, std::vector<double>{ 0.6, 0.3 }, 2, 0);
+    std::shared_ptr<Component> arx = std::make_shared<ARXModel>(std::vector<double>{ -0.4 }, std::vector<double>{ 0.6 }, 2, 0);
     std::shared_ptr<Composite> feedbackLoop = std::make_shared<FeedbackComposite>();
     std::shared_ptr<SerialComposite> originalModel = std::make_shared<SerialComposite>();
     feedbackLoop->dodaj(pid);
@@ -250,6 +252,50 @@ void Simulator::edit()
         pid->setK(k);
         pid->setTi(Ti);
         pid->setTd(Td);
+    }
+    else if (component->getType() == ARXModel::type)
+    {
+        auto arx = std::dynamic_pointer_cast<ARXModel>(component);
+        int orderA;
+        int orderB;
+        std::vector<double> A;
+        std::vector<double> B;
+        int k;
+
+        std::cout << "Podaj liczbe wspolczynnikow A" << std::endl;
+        std::cin >> orderA;
+
+        A = std::vector<double>(orderA);
+        std::cout << "Podaj wspolczynniki A (od 0) oddzielone spacja" << std::endl;
+
+        for (int i = 0; i < orderA; i++)
+        {
+            std::cin >> A[i];
+        }
+        
+        std::cout << "Podaj liczbe wspolczynnikow B" << std::endl;
+        std::cin >> orderB;
+
+        B = std::vector<double>(orderB);
+        std::cout << "Podaj wspolczynniki B (od 0) oddzielone spacja" << std::endl;
+
+        for (int i = 0; i < orderB; i++)
+        {
+            std::cin >> B[i];
+        }
+        
+        std::cout << "Podaj k" << std::endl;
+        std::cin >> k;
+
+        if (!std::cin.good())
+        {
+            std::cout << "Unknown Error!" << std::endl;
+            return;
+        }
+
+        arx->setA(A);
+        arx->setB(B);
+        arx->setK(k);
     }
     else
     {
