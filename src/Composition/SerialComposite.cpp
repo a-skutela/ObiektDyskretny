@@ -9,3 +9,10 @@ double SerialComposite::step(double input)
     }
     return y;
 }
+
+std::string const SerialComposite::type = "SerialComposite";
+
+std::string SerialComposite::getType() const
+{
+    return SerialComposite::type;
+}

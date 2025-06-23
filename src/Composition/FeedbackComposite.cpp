@@ -10,3 +10,10 @@ double FeedbackComposite::step(double input)
     y_prev = y;
     return y;
 }
+
+std::string const FeedbackComposite::type = "FeedbackComposite";
+
+std::string FeedbackComposite::getType() const
+{
+    return FeedbackComposite::type;
+}

@@ -67,3 +67,25 @@ void PIDRegulator::validateNonNegative(double value, const std::string& name)
         throw std::invalid_argument(name + " must be non-negative.");
     }
 }
+
+const std::string PIDRegulator::type = "PIDRegulator";
+
+void PIDRegulator::serialize(std::ostream& output) const
+{
+    output << PIDRegulator::type << " ";
+    output << k << " " << Ti << " " << Td << " " << integral << " " << e_prev << std::endl;
+}
+
+void PIDRegulator::deserialize(std::istream& input)
+{
+    input >> k >> Ti >> Td >> integral >> e_prev;
+    if (!input)
+    {
+        throw std::runtime_error("Error while deserializing PIDRegulator from input stream.");
+    }
+}
+
+std::string PIDRegulator::getType() const
+{
+    return PIDRegulator::type;
+}

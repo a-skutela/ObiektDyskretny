@@ -48,11 +48,31 @@ public:
     double step(double input) override;
 
     /**
+     * \brief Serializes the ARXModel instance to an output stream.
+     * \param output The output stream to serialize to.
+     */
+    void serialize(std::ostream& output) const override;
+
+    /**
+     * \brief Deserializes the ARXModel instance from an input stream.
+     * \param input The input stream to deserialize from.
+     */
+    void deserialize(std::istream& input) override;
+
+    /**
      * \brief Compares two ARXModel instances for equality.
      * \param other The other ARXModel instance to compare with.
      * \return True if the models are equal, false otherwise.
      */
     bool operator==(const ARXModel& other) const;
+
+    /**
+     * \brief Retrieves the type of the model as a string.
+     * \return A string representing the type of the model.
+     */
+    std::string getType() const override;
+
+    static const std::string type;
 
 private:
     /**

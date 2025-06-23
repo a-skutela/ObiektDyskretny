@@ -63,3 +63,32 @@ lab4_build:
 
 lab4_run:
 	./lab4
+	
+lab4_build_win:
+	g++ -std=c++11 ../src/lab4.cpp \
+	 ../src/ARXModel/ARXModel.cpp \
+	 ../src/Serialization/serialization.cpp \
+	 ../src/Regulator/PIDRegulator.cpp \
+	 ../src/Feedback/FeedbackLoop.cpp \
+	 ../src/SignalGeneration/ConstantSignal.cpp \
+	 ../src/SignalGeneration/RectSignal.cpp \
+	 ../src/SignalGeneration/SinSignal.cpp \
+	 ../src/SignalGeneration/TriangleSignal.cpp \
+	 ../src/SignalGeneration/WhiteNoiseSignal.cpp \
+	 ../src/SignalGeneration/Decorators/SignalDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddSinDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddRectDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddTriangleDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddWhiteNoiseDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/AddConstantDecorator.cpp \
+	 ../src/SignalGeneration/Decorators/ClampDecorator.cpp \
+	 ../src/Composition/Composite.cpp \
+	 ../src/Composition/ConcreteComponent.cpp \
+	 ../src/Composition/FeedbackComposite.cpp \
+	 ../src/Composition/ParallelComposite.cpp \
+	 ../src/Composition/SerialComposite.cpp \
+	 ../src/Composition/ComponentFactory.cpp \
+	 -o lab4.exe
+
+lab4_run_win:
+	./lab4.exe

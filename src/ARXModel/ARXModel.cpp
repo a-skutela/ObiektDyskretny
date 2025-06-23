@@ -51,3 +51,20 @@ bool ARXModel::operator==(const ARXModel& other) const
         generator == other.generator && 
         distribution == other.distribution;
 }
+
+void ARXModel::serialize(std::ostream& output) const
+{
+    output << *this;
+}
+
+void ARXModel::deserialize(std::istream& input)
+{
+    input >> *this;
+}
+
+std::string const ARXModel::type = "ARXModel";
+
+std::string ARXModel::getType() const
+{
+     return ARXModel::type;
+}

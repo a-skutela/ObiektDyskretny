@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../ObjectSISO.h"
+#include "../Composition/ConcreteComponent.h"
 #include <string>
 
 /**
@@ -8,7 +9,7 @@
  * \class PIDRegulator
  * \brief Implements a Proportional-Integral-Derivative (PID) regulator.
  */
-class PIDRegulator : public ObjectSISO
+class PIDRegulator : public ConcreteComponent
 {
     double k;
     double Ti;
@@ -51,6 +52,26 @@ public:
      * \throws std::invalid_argument if Td is negative.
      */
     void setTd(double Td);
+
+    /**
+     * \brief Serializes the PIDRegulator instance to an output stream.
+     * \param output The output stream to serialize to.
+     */
+    void serialize(std::ostream& output) const override;
+
+    /**
+     * \brief Deserializes the PIDRegulator instance from an input stream.
+     * \param input The input stream to deserialize from.
+     */
+    void deserialize(std::istream& input) override;
+
+    /**
+     * \brief Retrieves the type of the regulator as a string.
+     * \return A string representing the type of the regulator.
+     */
+    std::string getType() const override;
+
+    static const std::string type;
 
 private:
     double proportionalResponse(double e);
