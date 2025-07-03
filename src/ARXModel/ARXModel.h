@@ -66,10 +66,22 @@ public:
      */
     bool operator==(const ARXModel& other) const;
 
+    /**
+     * \brief Sets the coefficients of the autoregressive and exogenous input parts.
+     * \param newA New coefficients for the autoregressive part.
+     */
     void setA(std::vector<double> newA);
 
+    /**
+     * \brief Sets the coefficients of the exogenous input part.
+     * \param newB New coefficients for the exogenous input part.
+     */
     void setB(std::vector<double> newB);
 
+    /**
+     * \brief Sets the delay between input and output.
+     * \param newK New delay value.
+     */
     void setK(int newK);
 
     /**
@@ -78,8 +90,15 @@ public:
      */
     std::string getType() const override;
 
+    /**
+     * \brief Prints the ARX model details to an output stream.
+     * \param output The output stream to print to.
+     */
     void print(std::ostream& output) const override;
 
+    /**
+     * \brief A string representing the type of the component.
+     */
     static const std::string type;
 
 private:

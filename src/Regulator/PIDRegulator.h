@@ -53,6 +53,10 @@ public:
      */
     void setTd(double Td);
 
+    /**
+     * \brief Prints the ARX model details to an output stream.
+     * \param output The output stream to print to.
+     */
     void print(std::ostream& output) const override;
 
     /**
@@ -73,6 +77,9 @@ public:
      */
     std::string getType() const override;
 
+    /**
+     * \brief A string representing the type of the component.
+     */
     static const std::string type;
 
 private:

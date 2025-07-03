@@ -41,6 +41,10 @@ public:
      */
     virtual void deserialize(std::istream& input, std::vector<std::shared_ptr<Component>>& components) = 0;
 
+    /**
+     * \brief Prints the ARX model details to an output stream.
+     * \param output The output stream to print to.
+     */
     virtual void print(std::ostream& output) const = 0;
 
     /**

@@ -47,5 +47,8 @@ public:
      */
     static const ConstantSignal zero;
 
+    /**
+     * \brief A string representing the type of the signal.
+     */
     static const std::string type;
 };

@@ -19,6 +19,9 @@ public:
      */
     double step(double input);
 
+    /**
+     * \brief A string representing the type of the component.
+     */
     static const std::string type;
 
     /**

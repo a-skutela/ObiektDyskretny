@@ -10,8 +10,16 @@
 class ParallelComposite : public Composite
 {
 public:
+    /**
+     * \brief Processes the input signal through the parallel composite.
+     * \param input The input signal to process.
+     * \return The processed output signal.
+     */
     double step(double input);
     
+    /**
+     * \brief A string representing the type of the component.
+     */
     static const std::string type;
 
     /**

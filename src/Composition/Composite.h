@@ -45,5 +45,9 @@ public:
      */
     bool usun(std::shared_ptr<Component> component);
 
+    /**
+     * \brief Prints the ARX model details to an output stream.
+     * \param output The output stream to print to.
+     */
     void print(std::ostream& output) const override;
 };

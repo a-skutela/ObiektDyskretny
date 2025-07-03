@@ -45,5 +45,8 @@ public:
      */
     void deserialize(std::istream& input) override;
 
+    /**
+     * \brief A string representing the type of the signal.
+     */
     static const std::string type;
 };

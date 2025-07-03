@@ -33,6 +33,9 @@ public:
      */
     std::string getType() const override;
 
+    /**
+     * \brief A string representing the type of the signal.
+     */
     static const std::string type;
 
 protected:
